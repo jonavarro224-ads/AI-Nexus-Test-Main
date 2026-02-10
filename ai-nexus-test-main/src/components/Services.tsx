@@ -1,36 +1,41 @@
 import { motion } from 'framer-motion';
-import { Workflow, Brain, GraduationCap } from 'lucide-react';
+import { Cpu, Zap, GraduationCap } from 'lucide-react';
+
+const services = [
+  {
+    icon: Cpu,
+    title: 'Structural AI Auditing',
+    description:
+      'Deep-dive into your workflows, systems, and bottlenecks. We reverse-engineer inefficiencies and map out automation pathways that save time, reduce errors, and unlock capacity.',
+    gradient: 'from-cyan-500 to-blue-500',
+  },
+  {
+    icon: Zap,
+    title: 'Strategic Implementation',
+    description:
+      'We don't just recommend—we build. From custom AI agents to automated reporting pipelines, we deploy solutions tailored to your business. Fast. Secure. Scalable.',
+    gradient: 'from-blue-500 to-purple-500',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Corporate Education',
+    description:
+      'Empower your team to work with AI, not fear it. We provide hands-on training so your people can own the tools, adapt them, and innovate beyond what we deliver.',
+    gradient: 'from-purple-500 to-pink-500',
+  },
+];
 
 export default function Services() {
-  const services = [
-    {
-      icon: Workflow,
-      title: 'Structural AI Auditing',
-      description:
-        'We dissect your current organizational structure to identify bottlenecks and high-impact AI opportunities.',
-      gradient: 'from-cyan-500 to-blue-500',
-    },
-    {
-      icon: Brain,
-      title: 'Strategic Implementation',
-      description:
-        'Bespoke AI roadmaps that integrate seamlessly with your existing tech stack.',
-      gradient: 'from-blue-500 to-indigo-500',
-    },
-    {
-      icon: GraduationCap,
-      title: 'Corporate Education',
-      description:
-        'Workshops and training to upskill your team, ensuring they control the AI, not the other way around.',
-      gradient: 'from-cyan-500 to-teal-500',
-    },
-  ];
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <section id="services" className="py-24 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20"></div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,11 +43,11 @@ export default function Services() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-display font-bold text-white mb-6">
-            The Three Pillars
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+            How We Operate
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Our comprehensive approach to transforming your business through strategic AI integration
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            Three pillars of transformation. We audit. We implement. We educate. Then we build.
           </p>
         </motion.div>
 
@@ -73,7 +78,10 @@ export default function Services() {
                     {service.description}
                   </p>
 
-                  <div className="mt-6 inline-flex items-center text-cyan-400 font-semibold group-hover:gap-2 transition-all duration-300">
+                  <button 
+                    onClick={scrollToContact}
+                    className="mt-6 inline-flex items-center text-cyan-400 font-semibold group-hover:gap-2 transition-all duration-300 hover:text-cyan-300 cursor-pointer"
+                  >
                     <span>Learn more</span>
                     <svg
                       className="w-5 h-5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"
@@ -88,7 +96,7 @@ export default function Services() {
                         d="M9 5l7 7-7 7"
                       />
                     </svg>
-                  </div>
+                  </button>
                 </div>
               </div>
             </motion.div>

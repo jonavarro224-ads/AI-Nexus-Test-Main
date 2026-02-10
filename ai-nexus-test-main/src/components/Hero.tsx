@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck, Zap, Activity } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (
@@ -36,13 +37,12 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-lg font-semibold shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 transition-all group">
-              Get Developer Analysis
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-lg font-medium backdrop-blur-sm transition-all">
-              View Maintenance Plans
-            </button>
+            <Link to="/#contact">
+              <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-lg font-semibold shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 transition-all group">
+                Get Developer Analysis
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
           </div>
         </motion.div>
 

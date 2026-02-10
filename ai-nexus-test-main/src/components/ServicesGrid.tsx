@@ -1,24 +1,24 @@
 import { motion } from 'framer-motion';
-import { FileSearch, Workflow, GraduationCap } from 'lucide-react';
+import { Code, Smartphone, Search, Wrench } from 'lucide-react';
 
 const services = [
   {
     id: 1,
-    icon: FileSearch,
-    title: 'Structural AI Audit',
-    description: 'We x-ray your workflows to find where manual data entry is bleeding revenue.',
+    icon: Code,
+    title: 'Custom Web Development',
+    description: 'High-performance websites engineered for speed, security, and scalability.',
   },
   {
     id: 2,
-    icon: Workflow,
-    title: 'Custom Automation Pipelines',
-    description: 'We engineer self-running node systems (n8n/Make) that replace human grunt work.',
+    icon: Smartphone,
+    title: 'Mobile-First Design',
+    description: 'Responsive experiences that look flawless on any device, any screen size.',
   },
   {
     id: 3,
-    icon: GraduationCap,
-    title: 'Team Autonomy Training',
-    description: "We install the capability, not the dependency. Your team takes the keys.",
+    icon: Search,
+    title: 'SEO Optimization',
+    description: 'Rank higher. Get found. Convert visitors into customers with data-driven SEO.',
   },
 ];
 
@@ -34,31 +34,38 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: 'easeOut' },
+    transition: { duration: 0.6, ease: 'easeOut' },
   },
 };
 
 export default function ServicesGrid() {
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section id="services-grid" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            The Structural Transformation
+            What We Build
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            We don't just consult. We build.
+            From concept to deployment, we deliver digital solutions that drive results. Not theory. We build.
           </p>
         </motion.div>
 
@@ -95,13 +102,16 @@ export default function ServicesGrid() {
                     {service.description}
                   </p>
 
-                  {/* Arrow indicator (optional) */}
-                  <div className="mt-6 flex items-center text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {/* Learn More Button */}
+                  <button 
+                    onClick={scrollToContact}
+                    className="mt-6 flex items-center text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:text-blue-300 cursor-pointer"
+                  >
                     <span className="text-sm font-semibold">Learn more</span>
                     <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </div>
+                  </button>
                 </div>
               </motion.div>
             );
