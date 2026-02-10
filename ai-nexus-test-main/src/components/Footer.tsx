@@ -1,8 +1,38 @@
 import { Brain } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const scrollToSection = (id: string) => {
+    // If we're not on the home page, navigate there first
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+
+    // If we're on home page, just scroll
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
+  };
 
   return (
     <footer className="bg-slate-950 border-t border-white/10">
@@ -11,12 +41,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center space-x-2 group">
+            <button 
+              onClick={handleLogoClick}
+              className="flex items-center space-x-2 group"
+            >
               <Brain className="w-8 h-8 text-cyan-500 group-hover:text-cyan-400 transition-colors" />
               <span className="text-xl font-display font-bold text-white">
                 AI Direct Support
               </span>
-            </Link>
+            </button>
             <p className="text-slate-400 text-sm leading-relaxed">
               Your Website is Your Digital Supply Chain. We engineer high-velocity digital assets 
               with 24/7 maintenance for businesses that can't afford downtime.
@@ -34,36 +67,36 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <a 
-                  href="/#audit-types" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                <button 
+                  onClick={() => scrollToSection('audit-types')}
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm text-left"
                 >
                   Structural AI Auditing
-                </a>
+                </button>
               </li>
               <li>
-                <a 
-                  href="/#audit-types" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                <button 
+                  onClick={() => scrollToSection('audit-types')}
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm text-left"
                 >
                   Strategic Implementation
-                </a>
+                </button>
               </li>
               <li>
-                <a 
-                  href="/#audit-types" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                <button 
+                  onClick={() => scrollToSection('audit-types')}
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm text-left"
                 >
                   Corporate Education
-                </a>
+                </button>
               </li>
               <li>
-                <a 
-                  href="/#roi" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                <button 
+                  onClick={() => scrollToSection('roi')}
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm text-left"
                 >
                   ROI Calculator
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -75,28 +108,28 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <a 
-                  href="/#methodology" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                <button 
+                  onClick={() => scrollToSection('methodology')}
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm text-left"
                 >
                   Methodology
-                </a>
+                </button>
               </li>
               <li>
-                <a 
-                  href="/#about" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                <button 
+                  onClick={() => scrollToSection('about')}
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm text-left"
                 >
                   Why Us
-                </a>
+                </button>
               </li>
               <li>
-                <a 
-                  href="/#contact" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm text-left"
                 >
                   Contact
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -110,7 +143,7 @@ export default function Footer() {
               <li>
                 <Link 
                   to="/legal#terms" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm block"
                 >
                   Terms of Service
                 </Link>
@@ -118,7 +151,7 @@ export default function Footer() {
               <li>
                 <Link 
                   to="/legal#privacy" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm block"
                 >
                   Privacy Policy
                 </Link>
@@ -126,7 +159,7 @@ export default function Footer() {
               <li>
                 <Link 
                   to="/legal#cookies" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm block"
                 >
                   Cookie Policy
                 </Link>
@@ -134,7 +167,7 @@ export default function Footer() {
               <li>
                 <Link 
                   to="/legal#compliance" 
-                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors text-sm block"
                 >
                   Compliance
                 </Link>

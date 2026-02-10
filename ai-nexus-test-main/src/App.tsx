@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import ThankYou from './components/ThankYou';
 import Legal from './components/Legal';
+import WhyUs from './components/WhyUs';
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,6 +48,10 @@ function Home() {
         </div>
         
         <Methodology />
+        
+        <div id="about">
+          <WhyUs />
+        </div>
         
         <div id="contact">
           <FooterCTA />

@@ -79,18 +79,6 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => scrollToSection('audit-types')}
-              className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
-            >
-              Solutions
-            </button>
-            <button
-              onClick={() => scrollToSection('methodology')}
-              className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
-            >
-              Methodology
-            </button>
-            <button
               onClick={() => scrollToSection('roi')}
               className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
             >
@@ -125,18 +113,6 @@ export default function Navbar() {
             className="md:hidden bg-slate-900/98 backdrop-blur-xl border-b border-slate-800"
           >
             <div className="px-4 py-6 space-y-4">
-              <button
-                onClick={() => scrollToSection('audit-types')}
-                className="block w-full text-left text-slate-300 hover:text-cyan-400 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-slate-800/50"
-              >
-                Solutions
-              </button>
-              <button
-                onClick={() => scrollToSection('methodology')}
-                className="block w-full text-left text-slate-300 hover:text-cyan-400 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-slate-800/50"
-              >
-                Methodology
-              </button>
               <button
                 onClick={() => scrollToSection('roi')}
                 className="block w-full text-left text-slate-300 hover:text-cyan-400 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-slate-800/50"
