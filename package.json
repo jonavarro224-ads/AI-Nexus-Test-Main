@@ -1,8 +1,6 @@
 {
   "devDependencies": {
-    "@rollup/wasm-node": "^4.57.1"
-  },
-  "dependencies": {
+    "@rollup/wasm-node": "^4.57.1",
     "autoprefixer": "^10.4.24",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18"
