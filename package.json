@@ -1,5 +1,5 @@
-{
-  "devDependencies": {
-    "tsx": "^4.21.0"
-  }
+"scripts": {
+  "dev": "vite",
+  "build": "tsc && vite build",
+  "preview": "vite preview"
 }
