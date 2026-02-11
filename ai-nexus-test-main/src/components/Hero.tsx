@@ -37,7 +37,7 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link to="/#contact">
+           <Link to="/#contact">
               <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-lg font-semibold shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 transition-all group">
                 Get Developer Analysis
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
