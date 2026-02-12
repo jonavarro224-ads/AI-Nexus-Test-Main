@@ -36,7 +36,7 @@ export default function FooterCTA() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link to="/#contact">
+            <Link to="/schedule">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -47,15 +47,19 @@ export default function FooterCTA() {
               </motion.button>
             </Link>
 
-            <Link to="/#roi">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 text-white font-semibold rounded-lg backdrop-blur-sm transition-all duration-300"
-              >
-                Calculate Your ROI
-              </motion.button>
-            </Link>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                const element = document.getElementById('roi-machine');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 text-white font-semibold rounded-lg backdrop-blur-sm transition-all duration-300"
+            >
+              Calculate Your ROI
+            </motion.button>
           </div>
 
           {/* Trust Indicators */}

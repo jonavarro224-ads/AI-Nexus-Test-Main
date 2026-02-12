@@ -1,43 +1,46 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Scale, ShieldCheck, Cookie, FileCheck, ChevronRight, Home } from 'lucide-react';
 
 export default function Legal() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('terms');
 
-  const sections = [
+  const sections = useMemo(() => [
     { id: 'terms', label: 'Terms of Service', icon: Scale },
     { id: 'privacy', label: 'Privacy Policy', icon: ShieldCheck },
     { id: 'cookies', label: 'Cookie Policy', icon: Cookie },
     { id: 'compliance', label: 'Compliance Guidance', icon: FileCheck },
-  ];
+  ], []);
+
+  const scrollToElement = (id: string) => {
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    const yOffset = -100;
+    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const hash = location.hash.slice(1);
     if (hash && sections.some(s => s.id === hash)) {
       setActiveSection(hash);
-      setTimeout(() => {
-        const element = document.getElementById(hash);
-        if (element) {
-          const yOffset = -100;
-          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
+      const timeoutId = window.setTimeout(() => {
+        scrollToElement(hash);
       }, 100);
+
+      return () => window.clearTimeout(timeoutId);
     }
-  }, [location.hash]);
+  }, [location.hash, sections]);
 
   const scrollToSection = (id: string) => {
     setActiveSection(id);
-    window.location.hash = id;
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -100;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
+    // Use router navigation so HashRouter keeps /legal route intact.
+    navigate({ pathname: location.pathname, hash: `#${id}` }, { replace: true });
+    scrollToElement(id);
   };
 
   return (

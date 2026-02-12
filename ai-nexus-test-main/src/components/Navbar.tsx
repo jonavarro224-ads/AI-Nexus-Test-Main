@@ -82,7 +82,7 @@ export default function Navbar() {
               onClick={() => scrollToSection('roi')}
               className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
             >
-              ROI Engine
+              ROI Machine
             </button>
             <button
               onClick={() => scrollToSection('contact')}
@@ -117,11 +117,11 @@ export default function Navbar() {
                 onClick={() => scrollToSection('roi')}
                 className="block w-full text-left text-slate-300 hover:text-cyan-400 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-slate-800/50"
               >
-                ROI Engine
+                ROI Machine
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
+                className="block w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
               >
                 Book Strategy
               </button>

@@ -12,6 +12,7 @@ import BookingModal from './components/BookingModal';
 import ThankYou from './components/ThankYou';
 import Legal from './components/Legal';
 import WhyUs from './components/WhyUs';
+import CalendlyPage from './components/CalendlyPage';
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +34,7 @@ function Home() {
     <>
       <main className="min-h-screen bg-slate-950 text-white selection:bg-cyan-500/30">
         <Navbar />
-        <Hero onOpenModal={() => setIsModalOpen(true)} />
+        <Hero />
         
         <div id="methodology">
           <TechStack />
@@ -43,7 +44,7 @@ function Home() {
           <ServicesGrid />
         </div>
         
-        <div id="roi">
+        <div id="roi-machine" className="scroll-mt-20">
           <ROICalculator />
         </div>
         
@@ -94,6 +95,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/thank-you" element={<ThankYouPage />} />
         <Route path="/legal" element={<LegalPage />} />
+        <Route path="/schedule" element={<CalendlyPage />} />
       </Routes>
     </Router>
   );

@@ -13,12 +13,12 @@ export default function ROICalculator() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
+      transition: { duration: 0.8, ease: "easeOut" as const },
     },
   };
 
   return (
-    <section id="roi" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900">
+    <section id="roi" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900 scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div

@@ -13,7 +13,7 @@ const services = [
     icon: Zap,
     title: 'Strategic Implementation',
     description:
-      'We don't just recommend—we build. From custom AI agents to automated reporting pipelines, we deploy solutions tailored to your business. Fast. Secure. Scalable.',
+      'We don\'t just recommend - we build. From custom AI agents to automated reporting pipelines, we deploy solutions tailored to your business. Fast. Secure. Scalable.',
     gradient: 'from-blue-500 to-purple-500',
   },
   {

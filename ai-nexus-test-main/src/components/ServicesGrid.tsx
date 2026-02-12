@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Code, Smartphone, Search, Wrench } from 'lucide-react';
+import { Code, Smartphone, Search } from 'lucide-react';
 
 const services = [
   {
@@ -38,7 +38,7 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
+    transition: { duration: 0.6, ease: "easeOut" as const },
   },
 };
 
