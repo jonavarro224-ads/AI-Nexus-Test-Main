@@ -1,3 +1,4 @@
+
 import Pricing from './components/Pricing';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -45,10 +46,12 @@ function Home() {
           <ServicesGrid />
         </div>
         
+        <Pricing />
+        
         <div id="roi-machine" className="scroll-mt-20">
           <ROICalculator />
         </div>
-        
+
         <Methodology />
         
         <div id="about">
