@@ -20,7 +20,7 @@ export default function Navbar() {
 
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);
-    
+
     // If we're not on the home page, navigate there first
     if (location.pathname !== '/') {
       navigate(`/#${id}`);
@@ -43,7 +43,7 @@ export default function Navbar() {
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    
+
     if (location.pathname === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -53,11 +53,10 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? 'bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 shadow-lg shadow-black/10'
           : 'bg-transparent'
-      }`}
+        }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
@@ -84,12 +83,12 @@ export default function Navbar() {
             >
               ROI Machine
             </button>
-            <button
-              onClick={() => scrollToSection('contact')}
+            <Link
+              to="/schedule"
               className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105"
             >
               Book Strategy
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -119,12 +118,13 @@ export default function Navbar() {
               >
                 ROI Machine
               </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="block w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
+              <Link
+                to="/schedule"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 text-center"
               >
                 Book Strategy
-              </button>
+              </Link>
             </div>
           </motion.div>
         )}
