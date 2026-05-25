@@ -19,24 +19,27 @@ export default function Navbar() {
   }, []);
 
   const scrollToSection = (id: string) => {
+    const wasMobileMenuOpen = isMobileMenuOpen;
     setIsMobileMenuOpen(false);
     
+    const performScroll = () => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
     // If we're not on the home page, navigate there first
     if (location.pathname !== '/') {
       navigate(`/#${id}`);
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
       return;
     }
 
     // If we're on home page, just scroll
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (wasMobileMenuOpen) {
+      setTimeout(performScroll, 300); // Wait for mobile menu transition to finish
+    } else {
+      performScroll();
     }
   };
 
@@ -54,7 +57,7 @@ export default function Navbar() {
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || isMobileMenuOpen
           ? 'bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 shadow-lg shadow-black/10'
           : 'bg-transparent'
       }`}
@@ -84,12 +87,12 @@ export default function Navbar() {
             >
               ROI Machine
             </button>
-            <button
-              onClick={() => scrollToSection('contact')}
+            <Link
+              to="/schedule"
               className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105"
             >
               Book Strategy
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -110,7 +113,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-slate-900/98 backdrop-blur-xl border-b border-slate-800"
+            className="md:hidden bg-slate-900/98 backdrop-blur-xl border-b border-slate-800 overflow-hidden"
           >
             <div className="px-4 py-6 space-y-4">
               <button
@@ -119,12 +122,13 @@ export default function Navbar() {
               >
                 ROI Machine
               </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="block w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
+              <Link
+                to="/schedule"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full text-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
               >
                 Book Strategy
-              </button>
+              </Link>
             </div>
           </motion.div>
         )}

@@ -1,6 +1,6 @@
 
 import Pricing from './components/Pricing';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -18,19 +18,25 @@ import CalendlyPage from './components/CalendlyPage';
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const location = useLocation();
 
-  // Scroll to section if hash is present
+  // Scroll to section if hash is present, otherwise scroll to top
   useEffect(() => {
-    const hash = window.location.hash;
-    if (hash) {
+    if (location.hash) {
       setTimeout(() => {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+        try {
+          const element = document.querySelector(location.hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        } catch (e) {
+          console.error('Invalid scroll selector:', location.hash, e);
         }
       }, 100);
+    } else {
+      window.scrollTo(0, 0);
     }
-  }, []);
+  }, [location.hash, location.pathname]);
 
   return (
     <>
@@ -100,6 +106,8 @@ function App() {
         <Route path="/thank-you" element={<ThankYouPage />} />
         <Route path="/legal" element={<LegalPage />} />
         <Route path="/schedule" element={<CalendlyPage />} />
+        <Route path="/buynow" element={<Navigate to="/#pricing" replace />} />
+        <Route path="/buy-now" element={<Navigate to="/#pricing" replace />} />
       </Routes>
     </Router>
   );
