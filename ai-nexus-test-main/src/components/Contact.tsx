@@ -38,7 +38,7 @@ export default function Contact() {
             <form action="https://formsubmit.co/jonavarro224@gmail.com" method="POST">
               <input type="hidden" name="_subject" value="New Lead from AI Direct Support Site" />
               <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_next" value={`${window.location.origin}/thank-you`} />
+              <input type="hidden" name="_next" value={`${typeof window !== 'undefined' ? window.location.origin : 'https://aidirectsupport.com'}/thank-you`} />
 
               <div className="space-y-6">
                 <div>
