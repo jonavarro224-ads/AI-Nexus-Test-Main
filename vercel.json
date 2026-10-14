@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/buynow", "destination": "/pricing", "permanent": true },
+    { "source": "/buy-now", "destination": "/pricing", "permanent": true }
+  ]
+}

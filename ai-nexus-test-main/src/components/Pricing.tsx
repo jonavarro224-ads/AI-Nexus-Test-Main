@@ -111,6 +111,7 @@ export default function Pricing() {
             return (
               <div
                 key={plan.id}
+                id={plan.id}
                 className={`pricing-card ${plan.featured ? "pricing-card--featured" : ""} ${isHovered ? "pricing-card--hovered" : ""}`}
                 onMouseEnter={() => setHoveredPlan(plan.id)}
                 onMouseLeave={() => setHoveredPlan(null)}
@@ -191,6 +192,7 @@ export default function Pricing() {
           padding: 6rem 1.5rem;
           background: #050a14;
           overflow: hidden;
+          scroll-margin-top: 80px;
         }
 
         .pricing-grid-bg {
@@ -274,6 +276,7 @@ export default function Pricing() {
           border-radius: 16px;
           padding: 2rem 1.75rem;
           transition: border-color 0.2s ease, transform 0.2s ease;
+          scroll-margin-top: 100px;
         }
 
         .pricing-card--hovered {
