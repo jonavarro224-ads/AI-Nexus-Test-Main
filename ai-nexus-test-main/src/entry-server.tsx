@@ -5,7 +5,7 @@
  * scripts/prerender.mjs to statically render each route.
  *
  * In React Router v7, StaticRouter is exported from the main
- * 'react-router-dom' package (not 'react-router-dom/server').
+ * 'react-router-dom' package (not 'react-router').
  *
  * SSR safety rules:
  *   - No top-level window/document/localStorage access anywhere in

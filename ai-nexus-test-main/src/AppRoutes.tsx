@@ -15,7 +15,6 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import TechStack from './components/TechStack';
-import SEOAnalyzer from './components/SEOAnalyzer';
 import ServicesGrid from './components/ServicesGrid';
 import ROICalculator from './components/ROICalculator';
 import Methodology from './components/Methodology';
@@ -41,7 +40,6 @@ function Home() {
       </div>
 
       <div id="audit">
-        <SEOAnalyzer />
       </div>
 
       <div id="audit-types">
