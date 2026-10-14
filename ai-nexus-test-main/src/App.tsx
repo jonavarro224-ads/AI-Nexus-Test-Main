@@ -1,108 +1,27 @@
+/**
+ * src/App.tsx
+ *
+ * Client-side application shell.
+ * Uses BrowserRouter (was HashRouter — migrated for SEO).
+ *
+ * Client-only concerns live here (not in AppRoutes):
+ *   - PageMeta  — updates <head> on route changes via useEffect
+ *   - ScrollManager — scroll-to-top, scroll-to-hash, hash-URL redirect shim
+ */
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './AppRoutes';
+import PageMeta from './components/PageMeta';
+import ScrollManager from './components/ScrollManager';
 
-import Pricing from './components/Pricing';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import TechStack from './components/TechStack';
-import ServicesGrid from './components/ServicesGrid';
-import ROICalculator from './components/ROICalculator';
-import Methodology from './components/Methodology';
-import FooterCTA from './components/FooterCTA';
-import Footer from './components/Footer';
-import BookingModal from './components/BookingModal';
-import ThankYou from './components/ThankYou';
-import Legal from './components/Legal';
-import WhyUs from './components/WhyUs';
-import CalendlyPage from './components/CalendlyPage';
-
-function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Scroll to section if hash is present
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (hash) {
-      setTimeout(() => {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    }
-  }, []);
-
+export default function App() {
   return (
-    <>
-      <main className="min-h-screen bg-slate-950 text-white selection:bg-cyan-500/30">
-        <Navbar />
-        <Hero />
-        
-        <div id="methodology">
-          <TechStack />
-        </div>
-        
-        <div id="audit-types">
-          <ServicesGrid />
-        </div>
-        
-        <Pricing />
-        
-        <div id="roi-machine" className="scroll-mt-20">
-          <ROICalculator />
-        </div>
-
-        <Methodology />
-        
-        <div id="about">
-          <WhyUs />
-        </div>
-        
-        <div id="contact">
-          <FooterCTA />
-        </div>
-        
-        <Footer />
-      </main>
-      
-      <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </>
+    <BrowserRouter>
+      {/* Client-side head manager — no-op on server */}
+      <PageMeta />
+      {/* Scroll management + legacy hash-URL redirect */}
+      <ScrollManager />
+      {/* Shared route tree */}
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
-
-function LegalPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  return (
-    <div className="min-h-screen bg-slate-950">
-      <Navbar />
-      <Legal />
-      <Footer />
-    </div>
-  );
-}
-
-function ThankYouPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  return <ThankYou />;
-}
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/thank-you" element={<ThankYouPage />} />
-        <Route path="/legal" element={<LegalPage />} />
-        <Route path="/schedule" element={<CalendlyPage />} />
-      </Routes>
-    </Router>
-  );
-}
-
-export default App;
