@@ -1,81 +1,9 @@
 import { useState } from "react";
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-interface Plan {
-  id: string;
-  name: string;
-  badge?: string;
-  setup: string;
-  price: string;
-  period: string;
-  tagline: string;
-  stripeUrl: string;
-  featured: boolean;
-  features: string[];
-  cta: string;
-}
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-const plans: Plan[] = [
-  {
-    id: "essential",
-    name: "Essential",
-    setup: "$279 setup",
-    price: "$79",
-    period: "/mo",
-    tagline: "Your site, live and protected.",
-    stripeUrl: "https://buy.stripe.com/cNicMY3q5aep0mD8cmco000",
-    featured: false,
-    cta: "Get Started",
-    features: [
-      "Professional business website",
-      "Managed hosting & SSL certificate",
-      "Security monitoring & uptime alerts",
-      "1 content edit per month",
-      "Mobile-responsive design",
-      "24-hr support response time",
-    ],
-  },
-  {
-    id: "growth",
-    name: "Growth",
-    badge: "Most Popular",
-    setup: "$279 setup",
-    price: "$149",
-    period: "/mo",
-    tagline: "Everything you need to scale online.",
-    stripeUrl: "https://buy.stripe.com/cNicMYf8N9al2uL78ico001",
-    featured: true,
-    cta: "Start Growing",
-    features: [
-      "Everything in Essential",
-      "Unlimited text & image edits",
-      "Basic SEO optimization",
-      "Google Business Profile management",
-      "Monthly performance report",
-      "Priority 12-hr support response",
-    ],
-  },
-  {
-    id: "ultimate",
-    name: "Ultimate",
-    setup: "$279 setup",
-    price: "$299",
-    period: "/mo",
-    tagline: "Maximum velocity. Maximum leads.",
-    stripeUrl: "https://buy.stripe.com/00w5kwf8N0DP5GXdwGco002",
-    featured: false,
-    cta: "Go Ultimate",
-    features: [
-      "Everything in Growth",
-      "2 monthly blog posts (SEO-targeted)",
-      "Advanced keyword tracking",
-      "Landing page A/B testing",
-      "Lead capture funnel setup",
-      "Priority 4-hr support response",
-    ],
-  },
-];
+import {
+  plans,
+  foundingBannerText,
+  standardPricingPrefix,
+} from "../content/pricing";
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function Pricing() {
@@ -104,6 +32,16 @@ export default function Pricing() {
           </p>
         </div>
 
+        {/* Founding Banner */}
+        {foundingBannerText && (
+          <div className="pricing-founding-banner-wrapper">
+            <div className="pricing-founding-banner" role="status">
+              <span className="pricing-founding-banner-dot" aria-hidden="true" />
+              <span className="pricing-founding-banner-text">{foundingBannerText}</span>
+            </div>
+          </div>
+        )}
+
         {/* Cards */}
         <div className="pricing-cards">
           {plans.map((plan) => {
@@ -123,7 +61,7 @@ export default function Pricing() {
 
                 {/* Badge */}
                 {plan.badge && (
-                  <div className="pricing-badge" aria-label="Most popular plan">
+                  <div className="pricing-badge" aria-label={`${plan.badge} plan`}>
                     <span className="pricing-badge-dot" aria-hidden="true" />
                     {plan.badge}
                   </div>
@@ -140,6 +78,14 @@ export default function Pricing() {
                   <span className="pricing-price">{plan.price}</span>
                   <span className="pricing-period">{plan.period}</span>
                 </div>
+
+                {/* Standard pricing after founding period */}
+                {plan.standardPricingNote && (
+                  <div className="pricing-standard-line">
+                    <span className="pricing-standard-label">{standardPricingPrefix}</span>{" "}
+                    <span className="pricing-standard-value">{plan.standardPricingNote}</span>
+                  </div>
+                )}
 
                 <p className="pricing-tagline">{plan.tagline}</p>
 
@@ -250,6 +196,42 @@ export default function Pricing() {
           max-width: 560px;
           margin: 0 auto;
           line-height: 1.7;
+        }
+
+        /* ── Founding banner ── */
+        .pricing-founding-banner-wrapper {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 2.5rem;
+        }
+
+        .pricing-founding-banner {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 0.6rem 1.25rem;
+          background: rgba(0, 212, 255, 0.08);
+          border: 1px solid rgba(0, 212, 255, 0.25);
+          border-radius: 9999px;
+          color: #e0f2fe;
+          font-size: 0.875rem;
+          font-weight: 500;
+          text-align: center;
+          max-width: 100%;
+        }
+
+        .pricing-founding-banner-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #00d4ff;
+          box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+          animation: pulse 2s ease-in-out infinite;
+          flex-shrink: 0;
+        }
+
+        .pricing-founding-banner-text {
+          color: #e0f2fe;
         }
 
         /* ── Cards grid ── */
@@ -371,6 +353,23 @@ export default function Pricing() {
           font-size: 1rem;
           color: #5a6a82;
           font-weight: 400;
+        }
+
+        /* ── Standard pricing line ── */
+        .pricing-standard-line {
+          font-size: 0.75rem;
+          color: #64748b;
+          margin: 0 0 0.85rem;
+          line-height: 1.4;
+        }
+
+        .pricing-standard-label {
+          color: #64748b;
+        }
+
+        .pricing-standard-value {
+          color: #94a3b8;
+          font-weight: 600;
         }
 
         .pricing-tagline {
