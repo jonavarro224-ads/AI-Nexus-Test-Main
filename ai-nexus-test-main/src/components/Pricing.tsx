@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   plans,
+  customSystemsPlan,
   foundingBannerText,
   standardPricingPrefix,
 } from "../content/pricing";
@@ -102,22 +104,67 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                {/* CTA */}
-                <a
-                  href={plan.stripeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`pricing-cta ${plan.featured ? "pricing-cta--featured" : ""}`}
-                  aria-label={`${plan.cta} — ${plan.name} plan at ${plan.price}/mo`}
-                >
-                  {plan.cta}
-                  <span className="pricing-cta-arrow" aria-hidden="true">→</span>
-                </a>
+                {/* Card footer pinned to bottom */}
+                <div className="pricing-card-footer">
+                  {/* CTA */}
+                  <a
+                    href={plan.stripeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`pricing-cta ${plan.featured ? "pricing-cta--featured" : ""}`}
+                    aria-label={`${plan.cta} — ${plan.name} plan at ${plan.price}/mo`}
+                  >
+                    {plan.cta}
+                    <span className="pricing-cta-arrow" aria-hidden="true">→</span>
+                  </a>
 
-                <p className="pricing-trust">Cancel anytime &bull; No lock-in</p>
+                  <p className="pricing-trust">Cancel anytime &bull; No lock-in</p>
+                </div>
               </div>
             );
           })}
+
+          {/* Fourth card: Custom Systems */}
+          <div
+            id={customSystemsPlan.id}
+            className={`pricing-card ${hoveredPlan === customSystemsPlan.id ? "pricing-card--hovered" : ""}`}
+            onMouseEnter={() => setHoveredPlan(customSystemsPlan.id)}
+            onMouseLeave={() => setHoveredPlan(null)}
+          >
+            {/* Plan name */}
+            <div className="pricing-plan-name">{customSystemsPlan.name}</div>
+
+            {/* Scope info */}
+            <div className="pricing-setup">Custom build &bull; tailored</div>
+
+            {/* Price */}
+            <div className="pricing-price-row">
+              <span className="pricing-price pricing-price--custom">
+                {customSystemsPlan.price}
+              </span>
+            </div>
+
+            <p className="pricing-tagline">
+              {customSystemsPlan.description}
+            </p>
+
+            {/* Divider */}
+            <div className="pricing-divider" aria-hidden="true" />
+
+            {/* Card footer pinned to bottom */}
+            <div className="pricing-card-footer">
+              <Link
+                to={customSystemsPlan.href}
+                className="pricing-cta"
+                aria-label={`${customSystemsPlan.cta} — ${customSystemsPlan.name}`}
+              >
+                {customSystemsPlan.cta}
+                <span className="pricing-cta-arrow" aria-hidden="true">→</span>
+              </Link>
+
+              <p className="pricing-trust">Free discovery call &bull; Scoped quote</p>
+            </div>
+          </div>
         </div>
 
         {/* Bottom note */}
@@ -153,7 +200,7 @@ export default function Pricing() {
 
         .pricing-container {
           position: relative;
-          max-width: 1100px;
+          max-width: 1240px;
           margin: 0 auto;
         }
 
@@ -237,15 +284,21 @@ export default function Pricing() {
         /* ── Cards grid ── */
         .pricing-cards {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           gap: 1.25rem;
-          align-items: start;
+          align-items: stretch;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
+          .pricing-cards {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 640px) {
           .pricing-cards {
             grid-template-columns: 1fr;
-            max-width: 420px;
+            max-width: 440px;
             margin: 0 auto;
           }
         }
@@ -253,6 +306,9 @@ export default function Pricing() {
         /* ── Card base ── */
         .pricing-card {
           position: relative;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 16px;
@@ -349,6 +405,11 @@ export default function Pricing() {
           line-height: 1;
         }
 
+        .pricing-price--custom {
+          font-size: clamp(1.85rem, 2.3vw, 2.35rem);
+          line-height: 1.1;
+        }
+
         .pricing-period {
           font-size: 1rem;
           color: #5a6a82;
@@ -415,6 +476,13 @@ export default function Pricing() {
           font-weight: 700;
           flex-shrink: 0;
           margin-top: 2px;
+        }
+
+        /* ── Card footer ── */
+        .pricing-card-footer {
+          margin-top: auto;
+          display: flex;
+          flex-direction: column;
         }
 
         /* ── CTA button ── */
