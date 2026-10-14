@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   plans,
   customSystemsPlan,
+  individualServices,
   foundingBannerText,
   standardPricingPrefix,
 } from "../content/pricing";
@@ -174,6 +175,37 @@ export default function Pricing() {
             Payments processed securely via Stripe. Your site build starts within
             24 hours of payment.
           </span>
+        </div>
+
+        {/* Individual Services Section */}
+        <div className="pricing-services-section">
+          <div className="pricing-services-header">
+            <h3 className="pricing-services-title">Individual Services</h3>
+            <p className="pricing-services-subtitle">
+              Need a targeted project or standalone build? Transparent pricing with no recurring contract required.
+            </p>
+          </div>
+
+          <div className="pricing-services-list">
+            {individualServices.map((service, index) => (
+              <div key={index} className="pricing-service-row">
+                <div className="pricing-service-info">
+                  <span className="pricing-service-name">{service.name}</span>
+                </div>
+                <div className="pricing-service-action">
+                  <span className="pricing-service-price">{service.price}</span>
+                  <Link
+                    to={service.href}
+                    className="pricing-service-btn"
+                    aria-label={`Book a call for ${service.name}`}
+                  >
+                    Book a call
+                    <span className="pricing-cta-arrow" aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -545,6 +577,123 @@ export default function Pricing() {
           margin-top: 2.5rem;
           font-size: 0.8rem;
           color: #4a5e78;
+        }
+
+        /* ── Individual Services Section ── */
+        .pricing-services-section {
+          margin-top: 4.5rem;
+          padding-top: 3.5rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .pricing-services-header {
+          text-align: center;
+          margin-bottom: 2rem;
+        }
+
+        .pricing-services-title {
+          font-size: clamp(1.5rem, 2.5vw, 2rem);
+          font-weight: 700;
+          color: #f0f4ff;
+          letter-spacing: -0.02em;
+          margin: 0 0 0.5rem;
+        }
+
+        .pricing-services-subtitle {
+          font-size: 0.95rem;
+          color: #8899b4;
+          max-width: 540px;
+          margin: 0 auto;
+          line-height: 1.6;
+        }
+
+        .pricing-services-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          max-width: 820px;
+          margin: 0 auto;
+        }
+
+        .pricing-service-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 1.1rem 1.5rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          transition: border-color 0.2s ease, background 0.2s ease;
+          gap: 1rem;
+        }
+
+        .pricing-service-row:hover {
+          border-color: rgba(0, 212, 255, 0.35);
+          background: rgba(0, 212, 255, 0.02);
+        }
+
+        .pricing-service-name {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #f0f4ff;
+        }
+
+        .pricing-service-action {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+        }
+
+        .pricing-service-price {
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: #00d4ff;
+          white-space: nowrap;
+        }
+
+        .pricing-service-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 0.55rem 1.15rem;
+          border-radius: 8px;
+          font-size: 0.85rem;
+          font-weight: 600;
+          text-decoration: none;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          background: rgba(255, 255, 255, 0.06);
+          color: #e0eaff;
+          white-space: nowrap;
+          transition: all 0.2s ease;
+        }
+
+        .pricing-service-btn:hover {
+          background: rgba(255, 255, 255, 0.12);
+          border-color: rgba(0, 212, 255, 0.4);
+          color: #ffffff;
+        }
+
+        .pricing-service-btn:hover .pricing-cta-arrow {
+          transform: translateX(3px);
+        }
+
+        @media (max-width: 640px) {
+          .pricing-service-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 1.1rem;
+          }
+
+          .pricing-service-action {
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .pricing-service-btn {
+            padding: 0.5rem 1rem;
+          }
         }
       `}</style>
     </section>
