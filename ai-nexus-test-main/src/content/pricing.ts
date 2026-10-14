@@ -3,16 +3,16 @@ export interface Plan {
   name: string;
   badge?: string;
   setup: string;
+  standardSetup?: string;
   price: string;
   period: string;
+  standardMonthly?: string;
   tagline: string;
   stripeUrl: string;
   featured: boolean;
   features: string[];
   cta: string;
-  standardSetup: string;
-  standardMonthly: string;
-  standardPricingNote: string;
+  standardPricingNote?: string;
 }
 
 export interface CustomPlan {
@@ -33,6 +33,9 @@ export interface IndividualService {
 export const foundingBannerText =
   "Founding client pricing: first 5 clients. Standard pricing applies after.";
 
+export const pricingSubtitle =
+  "Every plan includes a professionally engineered website. Founding clients get $279 setup on any plan.";
+
 export const standardPricingPrefix = "Standard pricing after founding period:";
 
 export const plans: Plan[] = [
@@ -46,8 +49,6 @@ export const plans: Plan[] = [
     stripeUrl: "https://buy.stripe.com/cNicMY3q5aep0mD8cmco000",
     featured: false,
     cta: "Get Started",
-    standardSetup: "$279",
-    standardMonthly: "$79/mo",
     standardPricingNote: "$279 setup + $79/mo",
     features: [
       "Professional business website",
@@ -63,15 +64,14 @@ export const plans: Plan[] = [
     name: "Growth",
     badge: "Best Value",
     setup: "$279 setup",
+    standardSetup: "$499",
     price: "$149",
     period: "/mo",
+    standardMonthly: "$199/mo",
     tagline: "Everything you need to scale online.",
     stripeUrl: "https://buy.stripe.com/cNicMYf8N9al2uL78ico001",
     featured: true,
     cta: "Start Growing",
-    standardSetup: "$499",
-    standardMonthly: "$199/mo",
-    standardPricingNote: "$499 setup + $199/mo",
     features: [
       "Everything in Essential",
       "Up to 5 edit requests per month (48-hr turnaround)",
@@ -85,15 +85,14 @@ export const plans: Plan[] = [
     id: "ultimate",
     name: "Ultimate",
     setup: "$279 setup",
+    standardSetup: "$799",
     price: "$299",
     period: "/mo",
+    standardMonthly: "$399/mo",
     tagline: "Maximum velocity. Maximum leads.",
     stripeUrl: "https://buy.stripe.com/00w5kwf8N0DP5GXdwGco002",
     featured: false,
     cta: "Go Ultimate",
-    standardSetup: "$799",
-    standardMonthly: "$399/mo",
-    standardPricingNote: "$799 setup + $399/mo",
     features: [
       "Everything in Growth",
       "2 monthly blog posts (SEO-targeted)",

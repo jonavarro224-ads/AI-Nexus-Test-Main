@@ -5,6 +5,7 @@ import {
   customSystemsPlan,
   individualServices,
   foundingBannerText,
+  pricingSubtitle,
   standardPricingPrefix,
 } from "../content/pricing";
 
@@ -29,9 +30,7 @@ export default function Pricing() {
             One setup. <span className="pricing-title-accent">Monthly momentum.</span>
           </h2>
           <p className="pricing-subtitle">
-            Every plan includes a professionally engineered website for $279 — then
-            a flat monthly fee that covers hosting, security, and support. No
-            surprises, no hidden costs.
+            {pricingSubtitle}
           </p>
         </div>
 
@@ -74,12 +73,28 @@ export default function Pricing() {
                 <div className="pricing-plan-name">{plan.name}</div>
 
                 {/* Setup fee */}
-                <div className="pricing-setup">{plan.setup} &bull; then</div>
+                <div className="pricing-setup">
+                  {plan.setup}
+                  {plan.standardSetup && (
+                    <span className="pricing-struck-setup">
+                      {" "}
+                      <span className="sr-only">regular price </span>
+                      <s>{plan.standardSetup}</s>
+                    </span>
+                  )}{" "}
+                  &bull; then
+                </div>
 
                 {/* Price */}
                 <div className="pricing-price-row">
                   <span className="pricing-price">{plan.price}</span>
                   <span className="pricing-period">{plan.period}</span>
+                  {plan.standardMonthly && (
+                    <span className="pricing-struck-price">
+                      <span className="sr-only">regular price </span>
+                      <s>{plan.standardMonthly}</s>
+                    </span>
+                  )}
                 </div>
 
                 {/* Standard pricing after founding period */}
@@ -421,12 +436,25 @@ export default function Pricing() {
           margin-bottom: 0.25rem;
         }
 
+        .pricing-struck-setup {
+          color: #64748b;
+          font-size: 0.78rem;
+          margin-left: 0.25rem;
+        }
+
+        .pricing-struck-setup s {
+          text-decoration: line-through;
+          text-decoration-color: rgba(239, 68, 68, 0.65);
+          color: #64748b;
+        }
+
         /* ── Price ── */
         .pricing-price-row {
           display: flex;
           align-items: baseline;
           gap: 4px;
           margin-bottom: 0.5rem;
+          flex-wrap: wrap;
         }
 
         .pricing-price {
@@ -435,6 +463,31 @@ export default function Pricing() {
           color: #f0f4ff;
           letter-spacing: -0.03em;
           line-height: 1;
+        }
+
+        .pricing-struck-price {
+          font-size: 1.15rem;
+          color: #64748b;
+          font-weight: 500;
+          margin-left: 0.35rem;
+        }
+
+        .pricing-struck-price s {
+          text-decoration: line-through;
+          text-decoration-color: rgba(239, 68, 68, 0.75);
+          color: #64748b;
+        }
+
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border-width: 0;
         }
 
         .pricing-price--custom {
